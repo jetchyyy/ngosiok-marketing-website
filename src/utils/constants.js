@@ -1,23 +1,29 @@
 export const COMPANY_INFO = {
-  name: 'Ngosiok Marketing',
-  tagline: 'Quality Noodles Since 1943',
-  email: 'sales@ngosiokmarketing.com',
-  phone: '+63 (32) 261-3233',
-  mobile: '+63 917 322 3234',
-  address: '325 B. Aranas Street, Cebu City, Philippines',
-  foundedYear: 1943,
+  name: "NGOSIOK MARKETING",
+  tagline: "Quality Noodles Since 1945",
+  email: "sales@ngosiokmarketing.com",
+  phone: "+63 (32) 2613233",
+  phoneRange: "+63 (32) 2613233 to 2613235",
+  fax: "+63 (32) 2613577",
+  faxRange: "+63 (32) 2613577 to 2613578",
+  mobile: "+63 917 322 3234",
+  address: "325 B. Aranas Street, Cebu City 6000, Philippines",
+  factory: "Cansojong, Talisay City, Cebu, Philippines",
+  foundedYear: 1945,
+  employees: 200,
 };
 
 export const SOCIAL_LINKS = {
-  facebook: 'https://www.facebook.com/p/Ngosiok-Marketing-Super-Q-Golden-Bihon-100063821509709/',
-  instagram: 'https://www.instagram.com/superq_bihon/',
+  facebook:
+    "https://www.facebook.com/p/Ngosiok-Marketing-Super-Q-Golden-Bihon-100063821509709/",
+  instagram: "https://www.instagram.com/superq_bihon/",
 };
 
 export const NAVIGATION_LINKS = [
-  { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
-  { name: 'Products', path: '/products' },
-  { name: 'Contact', path: '/contact' },
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Products", path: "/products" },
+  { name: "Contact", path: "/contact" },
 ];
 
 export const ANIMATION_DURATION = {
@@ -31,5 +37,5 @@ export const BREAKPOINTS = {
   md: 768,
   lg: 1024,
   xl: 1280,
-  '2xl': 1536,
+  "2xl": 1536,
 };

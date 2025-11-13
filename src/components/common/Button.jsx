@@ -3,7 +3,9 @@ import { classNames } from '@/utils/helpers';
 const variants = {
   primary: 'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500',
   secondary: 'bg-secondary-600 text-white hover:bg-secondary-700 focus:ring-secondary-500',
+  tertiary: 'bg-tertiary-500 text-gray-900 hover:bg-tertiary-600 focus:ring-tertiary-500',
   outline: 'border-2 border-primary-600 text-primary-600 hover:bg-primary-50 focus:ring-primary-500',
+  'outline-tertiary': 'border-2 border-tertiary-500 text-tertiary-500 hover:bg-tertiary-500/10 focus:ring-tertiary-500',
   ghost: 'text-gray-700 hover:bg-gray-100 focus:ring-gray-500',
 };
 
