@@ -1,0 +1,67 @@
+export const products = [
+  {
+    id: 1,
+    name: 'Super Q Golden Bihon',
+    category: 'Cornstarch-based Noodles',
+    description: 'Fine strands with natural yellow color from cornstarch. Rectangular, hard, and compact shape allowing for considerable yield. Cooked product is soft, smooth, and bouncy while retaining distinct bites.',
+    features: [
+      'Natural yellow color',
+      'Fine strands',
+      'High yield',
+      'Soft and smooth when cooked',
+    ],
+    image: '/images/products/super-q.jpg',
+  },
+  {
+    id: 2,
+    name: 'Eagle VSP Bihon',
+    category: 'Cornstarch-based Noodles',
+    description: 'Premium cornstarch-based noodles known for their excellent quality and consistency. Perfect for Filipino dishes like pancit bihon.',
+    features: [
+      'Premium quality',
+      'Consistent texture',
+      'Easy to cook',
+      'Traditional Filipino favorite',
+    ],
+    image: '/images/products/eagle-vsp.jpg',
+  },
+  {
+    id: 3,
+    name: 'First Choice Steamed Noodles',
+    category: 'Wheat-based Noodles',
+    description: 'High-quality wheat-based Chinese noodles, steamed to perfection. Ideal for various Asian noodle dishes.',
+    features: [
+      'Authentic Chinese noodles',
+      'Steamed process',
+      'Versatile cooking',
+      'Premium wheat base',
+    ],
+    image: '/images/products/first-choice.jpg',
+  },
+  {
+    id: 4,
+    name: 'First Choice Egg Noodles',
+    category: 'Wheat-based Noodles',
+    description: 'Similar to our First Choice Steamed Noodles with added eggs for richer flavor and golden color. Perfect for premium noodle dishes.',
+    features: [
+      'Enriched with eggs',
+      'Rich flavor',
+      'Golden color',
+      'Premium quality',
+    ],
+    image: '/images/products/first-choice-egg.jpg',
+  },
+  {
+    id: 5,
+    name: 'Long Life Noodles',
+    category: 'Wheat-based Noodles',
+    description: 'Traditional wheat-based Chinese noodles symbolizing longevity. A staple for celebrations and everyday meals.',
+    features: [
+      'Traditional recipe',
+      'Long-lasting freshness',
+      'Celebration favorite',
+      'Authentic taste',
+    ],
+    image: '/images/products/long-life.jpg',
+  },
+];
