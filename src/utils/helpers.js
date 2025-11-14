@@ -13,6 +13,15 @@ export const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ');
 };
 
+// Tailwind CSS class merger utility (cn)
+// Combines clsx for conditional classes and tailwind-merge for Tailwind class deduplication
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export const cn = (...inputs) => {
+  return twMerge(clsx(inputs));
+};
+
 export const debounce = (func, wait) => {
   let timeout;
   return function executedFunction(...args) {

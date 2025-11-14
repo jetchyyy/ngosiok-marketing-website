@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Container } from '@/components/common/Container';
 import { Navigation } from './Navigation';
 import { MobileMenu } from './MobileMenu';
@@ -10,47 +11,127 @@ import { COMPANY_INFO } from '@/utils/constants';
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const scrollPosition = useScrollPosition();
-  const isScrolled = scrollPosition > 20;
+  const isScrolled = scrollPosition > 50;
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white shadow-lg py-3'
-          : 'bg-white/95 backdrop-blur-sm py-4'
-      }`}
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+      className="fixed top-0 left-0 right-0 z-50"
+      style={{
+        paddingLeft: isScrolled ? '1rem' : '0',
+        paddingRight: isScrolled ? '1rem' : '0',
+        paddingTop: isScrolled ? '1rem' : '0',
+      }}
     >
-      <Container>
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center text-white font-bold text-xl group-hover:scale-105 transition-transform">
-              N
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-900 font-heading">
-                {COMPANY_INFO.name}
-              </h1>
-              <p className="text-xs text-gray-600">{COMPANY_INFO.tagline}</p>
-            </div>
-          </Link>
-
-          <Navigation className="hidden md:flex" />
-
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            aria-label="Toggle menu"
+      <motion.div 
+        layout
+        className="w-full"
+        transition={{
+          layout: { duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }
+        }}
+      >
+        <motion.div
+          layout
+          className={`${
+            isScrolled
+              ? 'mx-auto max-w-7xl'
+              : 'w-full'
+          }`}
+          style={{
+            borderRadius: isScrolled ? '9999px' : '0',
+          }}
+          transition={{
+            duration: 0.6,
+            ease: [0.34, 1.56, 0.64, 1]
+          }}
+        >
+          <motion.div
+            layout
+            className={`${
+              isScrolled
+                ? 'bg-white/70 backdrop-blur-xl py-2.5 px-6 border border-white/40'
+                : 'bg-white/95 backdrop-blur-md py-4 px-0 border-b border-white/40'
+            }`}
+            style={{
+              boxShadow: isScrolled 
+                ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)' 
+                : '0 4px 16px 0 rgba(31, 38, 135, 0.05)',
+              borderRadius: isScrolled ? '9999px' : '0',
+            }}
+            transition={{
+              duration: 0.6,
+              ease: [0.34, 1.56, 0.64, 1]
+            }}
           >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700" />
-            ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
-            )}
-          </button>
-        </div>
-      </Container>
+            <Container className={isScrolled ? 'px-0' : ''}>
+              <div className="flex items-center justify-between">
+                <Link to="/" className="flex items-center space-x-3 group">
+                  <motion.div 
+                    layout
+                    className="relative flex-shrink-0"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl blur-sm opacity-50 group-hover:opacity-75 transition-opacity"></div>
+                    <motion.img
+                      src="/logo.jpg"
+                      alt={`${COMPANY_INFO.name} logo`}
+                      className="relative object-cover rounded-xl group-hover:scale-105 transition-all duration-300 ring-2 ring-primary-500/20 group-hover:ring-primary-500/40"
+                      loading="lazy"
+                      animate={{
+                        width: isScrolled ? '48px' : '56px',
+                        height: isScrolled ? '48px' : '56px',
+                      }}
+                      transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                    />
+                  </motion.div>
+                  <motion.div
+                    layout
+                    className="hidden sm:block"
+                  >
+                    <motion.h1 
+                      layout
+                      className="font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent font-heading whitespace-nowrap"
+                      animate={{
+                        fontSize: isScrolled ? '1rem' : '1.125rem',
+                      }}
+                      transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                    >
+                      {COMPANY_INFO.name}
+                    </motion.h1>
+                    <motion.p 
+                      layout
+                      className="text-gray-600 font-medium whitespace-nowrap"
+                      animate={{
+                        fontSize: isScrolled ? '0.7rem' : '0.75rem',
+                      }}
+                      transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                    >
+                      {COMPANY_INFO.tagline}
+                    </motion.p>
+                  </motion.div>
+                </Link>
 
-      <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-    </header>
+                <Navigation className="hidden md:flex" />
+
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="md:hidden p-2.5 rounded-xl hover:bg-primary-50 active:bg-primary-100 transition-colors border border-gray-200 hover:border-primary-200"
+                  aria-label="Toggle menu"
+                >
+                  {mobileMenuOpen ? (
+                    <X className="w-5 h-5 text-primary-600" />
+                  ) : (
+                    <Menu className="w-5 h-5 text-primary-600" />
+                  )}
+                </button>
+              </div>
+            </Container>
+          </motion.div>
+
+          <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+        </motion.div>
+      </motion.div>
+    </motion.header>
   );
 };
