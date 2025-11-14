@@ -39,3 +39,15 @@ export const BREAKPOINTS = {
   xl: 1280,
   "2xl": 1536,
 };
+
+// SEO Constants
+export const SEO_CONFIG = {
+  defaultTitle: "Ngosiok Marketing",
+  titleTemplate: "%s | Ngosiok Marketing",
+  siteUrl: "https://ngosiokmarketing.netlify.app",
+  defaultDescription:
+    "Taste 80+ years of quality. Ngosiok Marketing offers the best bihon and pancit canton for your family. Explore our premium Filipino noodles today!",
+  defaultOgImage: "https://ngosiokmarketing.netlify.app/og-default.jpg",
+  twitterHandle: "@ngosiokmarketing",
+  fbAppId: "",
+};

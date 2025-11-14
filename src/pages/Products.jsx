@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
 import { Card, CardHeader, CardBody } from '@/components/common/Card';
 import { products } from '@/data/products';
 import { Package, CheckCircle } from 'lucide-react';
 import { classNames } from '@/utils/helpers';
+import { SEO_CONFIG } from '@/utils/constants';
 
 export const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -18,8 +20,36 @@ export const Products = () => {
     ? products 
     : products.filter(p => p.category === selectedCategory);
 
+  // Breadcrumb Schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": SEO_CONFIG.siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": `${SEO_CONFIG.siteUrl}/products`
+      }
+    ]
+  };
+
   return (
-    <main className="pt-20">
+    <>
+      <Seo
+        title="Premium Bihon & Pancit Canton | Our Products"
+        description="Browse our complete range of premium Filipino noodles. Super Q Golden Bihon, Eagle VSP, First Choice, and more. Find the perfect noodles for your family's pancit today!"
+        canonical={`${SEO_CONFIG.siteUrl}/products`}
+        ogImage={`${SEO_CONFIG.siteUrl}/og-products.jpg`}
+        schema={breadcrumbSchema}
+      />
+      <main className="pt-20">
       <Section className="bg-gradient-to-br from-secondary-50 to-primary-50">
         <div className="text-center max-w-4xl mx-auto">
           <div className="inline-block bg-secondary-100 text-secondary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
@@ -109,5 +139,6 @@ export const Products = () => {
         </div>
       </Section>
     </main>
+    </>
   );
 };

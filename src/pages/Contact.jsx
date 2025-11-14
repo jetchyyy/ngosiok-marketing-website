@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
 import { Card, CardHeader, CardBody } from '@/components/common/Card';
 import { Button } from '@/components/common/Button';
 import { Mail, Phone, MapPin, Clock, Send, Facebook, Instagram } from 'lucide-react';
-import { COMPANY_INFO, SOCIAL_LINKS } from '@/utils/constants';
+import { COMPANY_INFO, SOCIAL_LINKS, SEO_CONFIG } from '@/utils/constants';
 import { isValidEmail } from '@/utils/helpers';
 
 export const Contact = () => {
@@ -53,8 +54,61 @@ export const Contact = () => {
     }
   };
 
+  // LocalBusiness Schema for Google Maps and local search
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "FoodEstablishment",
+    "@id": `${SEO_CONFIG.siteUrl}/#organization`,
+    "name": COMPANY_INFO.name,
+    "image": `${SEO_CONFIG.siteUrl}/logo.jpg`,
+    "description": "Premium Filipino noodle manufacturer since 1945",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "325 B. Aranas Street",
+      "addressLocality": "Cebu City",
+      "addressRegion": "Cebu",
+      "postalCode": "6000",
+      "addressCountry": "PH"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "10.3",
+      "longitude": "123.9"
+    },
+    "url": SEO_CONFIG.siteUrl,
+    "telephone": COMPANY_INFO.phone,
+    "email": COMPANY_INFO.email,
+    "priceRange": "$$",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "17:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "08:00",
+        "closes": "12:00"
+      }
+    ],
+    "sameAs": [
+      SOCIAL_LINKS.facebook,
+      SOCIAL_LINKS.instagram
+    ]
+  };
+
   return (
-    <main className="pt-20">
+    <>
+      <Seo
+        title="Contact Us - Visit Our Cebu Office"
+        description="Ready to partner or order? Contact Ngosiok Marketing today. Visit us in Cebu City or reach out for distributor inquiries and bulk orders. We're here to help!"
+        canonical={`${SEO_CONFIG.siteUrl}/contact`}
+        ogImage={`${SEO_CONFIG.siteUrl}/og-contact.jpg`}
+        schema={localBusinessSchema}
+      />
+      <main className="pt-20">
       <Section className="bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="text-center max-w-4xl mx-auto">
           <div className="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
@@ -276,5 +330,6 @@ export const Contact = () => {
         </div>
       </Section>
     </main>
+    </>
   );
 };

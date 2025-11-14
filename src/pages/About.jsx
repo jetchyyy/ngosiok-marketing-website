@@ -1,10 +1,40 @@
+import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
 import { Card, CardHeader, CardBody } from '@/components/common/Card';
 import { History, Target, Award, Users } from 'lucide-react';
+import { SEO_CONFIG } from '@/utils/constants';
 
 export const About = () => {
+  // Breadcrumb Schema for better site structure in search results
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": SEO_CONFIG.siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About Us",
+        "item": `${SEO_CONFIG.siteUrl}/about`
+      }
+    ]
+  };
+
   return (
-    <main className="pt-20">
+    <>
+      <Seo
+        title="Our Story - 80+ Years of Noodle Excellence"
+        description="From humble beginnings in 1945 to becoming the Philippines' trusted noodle brand. Discover the Ngosiok Marketing story and our commitment to quality Filipino noodles."
+        canonical={`${SEO_CONFIG.siteUrl}/about`}
+        ogImage={`${SEO_CONFIG.siteUrl}/og-about.jpg`}
+        schema={breadcrumbSchema}
+      />
+      <main className="pt-20">
       <Section className="bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="text-center max-w-4xl mx-auto">
           <div className="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
@@ -161,5 +191,6 @@ export const About = () => {
         </div>
       </Section>
     </main>
+    </>
   );
 };

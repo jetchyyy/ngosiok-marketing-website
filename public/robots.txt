@@ -1,0 +1,14 @@
+# robots.txt for Ngosiok Marketing
+# Allow all crawlers to access all content
+
+User-agent: *
+Allow: /
+
+# Disallow admin or test pages if any
+# Disallow: /admin/
+
+# Provide the location of your sitemap
+Sitemap: https://ngosiokmarketing.netlify.app/sitemap.xml
+
+# Crawl-delay for polite bots (optional)
+Crawl-delay: 1
