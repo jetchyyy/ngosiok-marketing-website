@@ -5,20 +5,15 @@ import { Button } from '@/components/common/Button';
 import CountUp from '@/components/common/CountUp';
 import TiltedCard from '@/components/common/TiltedCard';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { createFadeUpVariants } from '@/utils/animations';
 
 export const Hero = () => {
-  const fadeUpVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-        delay: 0.5 + i * 0.2,
-        ease: [0.25, 0.4, 0.25, 1],
-      },
-    }),
-  };
+  // Custom fade up with longer delay for hero section
+  const fadeUpVariants = createFadeUpVariants({ 
+    baseDelay: 0.5, 
+    stagger: 0.2, 
+    duration: 1 
+  });
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -31,9 +26,6 @@ export const Hero = () => {
       {/* Overlay */}
       {/* <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-black/60"></div> */}
 
-      {/* --- UI/UX ADVICE --- */}
-      {/* A slightly stronger, uniform overlay provides the most consistent contrast. */}
-      {/* I've changed your gradient to this single value (70% black). */}
       <div className="absolute inset-0 bg-black/70"></div>
 
       {/* Animated blobs */}
@@ -51,7 +43,6 @@ export const Hero = () => {
               animate="visible"
               className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm text-white border border-white/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6"
             >
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
               <span>Quality Noodles Since 1945</span>
             </motion.div>
 

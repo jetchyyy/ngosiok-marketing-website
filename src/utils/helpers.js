@@ -1,22 +1,22 @@
 export const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
 export const scrollToElement = (elementId) => {
   const element = document.getElementById(elementId);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 };
 
 export const classNames = (...classes) => {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 };
 
 // Tailwind CSS class merger utility (cn)
 // Combines clsx for conditional classes and tailwind-merge for Tailwind class deduplication
-import { clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export const cn = (...inputs) => {
   return twMerge(clsx(inputs));
@@ -35,7 +35,7 @@ export const debounce = (func, wait) => {
 };
 
 export const formatPhoneNumber = (phone) => {
-  return phone.replace(/(\+\d{2})(\d{2})(\d{3})(\d{4})/, '$1 ($2) $3-$4');
+  return phone.replace(/(\+\d{2})(\d{2})(\d{3})(\d{4})/, "$1 ($2) $3-$4");
 };
 
 export const isValidEmail = (email) => {
