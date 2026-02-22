@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Container } from '@/components/common/Container';
 import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';

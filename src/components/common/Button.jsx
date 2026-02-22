@@ -7,6 +7,7 @@ const variants = {
   outline: 'border-2 border-primary-600 text-primary-600 hover:bg-primary-50 focus:ring-primary-500',
   'outline-tertiary': 'border-2 border-tertiary-500 text-tertiary-500 hover:bg-tertiary-500/10 focus:ring-tertiary-500',
   ghost: 'text-gray-700 hover:bg-gray-100 focus:ring-gray-500',
+  white: 'bg-white text-primary-700 hover:bg-primary-50 focus:ring-white',
 };
 
 const sizes = {
@@ -15,13 +16,13 @@ const sizes = {
   lg: 'px-8 py-4 text-lg',
 };
 
-export const Button = ({ 
-  children, 
-  variant = 'primary', 
-  size = 'md', 
+export const Button = ({
+  children,
+  variant = 'primary',
+  size = 'md',
   className = '',
   disabled = false,
-  ...props 
+  ...props
 }) => {
   return (
     <button

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Container } from '@/components/common/Container';
 import { Button } from '@/components/common/Button';
@@ -9,10 +10,10 @@ import { createFadeUpVariants } from '@/utils/animations';
 
 export const Hero = () => {
   // Custom fade up with longer delay for hero section
-  const fadeUpVariants = createFadeUpVariants({ 
-    baseDelay: 0.5, 
-    stagger: 0.2, 
-    duration: 1 
+  const fadeUpVariants = createFadeUpVariants({
+    baseDelay: 0.5,
+    stagger: 0.2,
+    duration: 1
   });
 
   return (
@@ -131,10 +132,10 @@ export const Hero = () => {
                       </div>
                     </div>
                   }
-                  containerHeight="333px"
-                  containerWidth="250px"
-                  imageHeight="333px"
-                  imageWidth="250px"
+                  containerHeight="280px"
+                  containerWidth="210px"
+                  imageHeight="280px"
+                  imageWidth="210px"
                   rotateAmplitude={14}
                   scaleOnHover={1.05}
                   showMobileWarning={false}
@@ -164,10 +165,10 @@ export const Hero = () => {
                       </div>
                     </div>
                   }
-                  containerHeight="427px"
-                  containerWidth="320px"
-                  imageHeight="427px"
-                  imageWidth="320px"
+                  containerHeight="360px"
+                  containerWidth="270px"
+                  imageHeight="360px"
+                  imageWidth="270px"
                   rotateAmplitude={14}
                   scaleOnHover={1.05}
                   showMobileWarning={false}
@@ -197,10 +198,10 @@ export const Hero = () => {
                       </div>
                     </div>
                   }
-                  containerHeight="533px"
-                  containerWidth="400px"
-                  imageHeight="533px"
-                  imageWidth="400px"
+                  containerHeight="453px"
+                  containerWidth="340px"
+                  imageHeight="453px"
+                  imageWidth="340px"
                   rotateAmplitude={14}
                   scaleOnHover={1.05}
                   showMobileWarning={false}

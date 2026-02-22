@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion'; // eslint-disable-line no-unused-vars
 import { Container } from '@/components/common/Container';
 import { Navigation } from './Navigation';
 import { MobileMenu } from './MobileMenu';
@@ -25,7 +25,7 @@ export const Header = () => {
         paddingTop: isScrolled ? '1rem' : '0',
       }}
     >
-      <motion.div 
+      <motion.div
         layout
         className="w-full"
         transition={{
@@ -34,11 +34,10 @@ export const Header = () => {
       >
         <motion.div
           layout
-          className={`${
-            isScrolled
-              ? 'mx-auto max-w-7xl'
-              : 'w-full'
-          }`}
+          className={`${isScrolled
+            ? 'mx-auto max-w-7xl'
+            : 'w-full'
+            }`}
           style={{
             borderRadius: isScrolled ? '9999px' : '0',
           }}
@@ -49,14 +48,13 @@ export const Header = () => {
         >
           <motion.div
             layout
-            className={`${
-              isScrolled
-                ? 'bg-white/70 backdrop-blur-xl py-2.5 px-6 border border-white/40'
-                : 'bg-white/95 backdrop-blur-md py-4 px-0 border-b border-white/40'
-            }`}
+            className={`${isScrolled
+              ? 'bg-white/70 backdrop-blur-xl py-2.5 px-6 border border-white/40'
+              : 'bg-white/95 backdrop-blur-md py-4 px-0 border-b border-white/40'
+              }`}
             style={{
-              boxShadow: isScrolled 
-                ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)' 
+              boxShadow: isScrolled
+                ? '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
                 : '0 4px 16px 0 rgba(31, 38, 135, 0.05)',
               borderRadius: isScrolled ? '9999px' : '0',
             }}
@@ -68,7 +66,7 @@ export const Header = () => {
             <Container className={isScrolled ? 'px-0' : ''}>
               <div className="flex items-center justify-between">
                 <Link to="/" className="flex items-center space-x-3 group">
-                  <motion.div 
+                  <motion.div
                     layout
                     className="relative flex-shrink-0"
                   >
@@ -89,7 +87,7 @@ export const Header = () => {
                     layout
                     className="hidden sm:block"
                   >
-                    <motion.h1 
+                    <motion.h1
                       layout
                       className="font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent font-heading whitespace-nowrap"
                       animate={{
@@ -99,7 +97,7 @@ export const Header = () => {
                     >
                       {COMPANY_INFO.name}
                     </motion.h1>
-                    <motion.p 
+                    <motion.p
                       layout
                       className="text-gray-600 font-medium whitespace-nowrap"
                       animate={{

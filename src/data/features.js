@@ -7,7 +7,7 @@ export const features = [
     title: "Quality Assured",
     description:
       "Committed to product quality and customer satisfaction with rigorous quality control processes. Every batch undergoes strict testing to ensure we deliver only the finest noodles that meet international standards.",
-    image: "/KimCNgosiok.jpg",
+    image: "/images/features/quality-assured.jpeg",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const features = [
     title: "Modern Production",
     description:
       "Automated processes eliminate exposure to foreign matter, ensuring clean and safe products. Our state-of-the-art facilities combine traditional craftsmanship with cutting-edge technology for consistent excellence.",
-    image: "/ngosiok.jpg",
+    image: "/images/features/modern-production.jpeg",
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export const features = [
     title: "Nationwide Distribution",
     description:
       "Expanded distribution network covering all regions of the Philippines. From Luzon to Mindanao, we ensure fresh products reach your table with our efficient logistics and cold chain management.",
-    image: "/logo.jpg",
+    image: "/images/features/nationwide-distribution.jpeg",
   },
   {
     id: 4,
@@ -31,6 +31,6 @@ export const features = [
     title: "Global Reach",
     description:
       "Exporting quality noodles to Asia, Europe, Middle East, and North America. Our products bring authentic Filipino taste to families worldwide, maintaining the same high standards across all markets.",
-    image: "/KimCNgosiok.jpg",
+    image: "/images/features/global-reach.jpeg",
   },
 ];

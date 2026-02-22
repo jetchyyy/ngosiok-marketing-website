@@ -1,59 +1,10 @@
-import { useState } from 'react';
 import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
 import { Card, CardHeader, CardBody } from '@/components/common/Card';
-import { Button } from '@/components/common/Button';
-import { Mail, Phone, MapPin, Clock, Send, Facebook, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Facebook, Instagram } from 'lucide-react';
 import { COMPANY_INFO, SOCIAL_LINKS, SEO_CONFIG } from '@/utils/constants';
-import { isValidEmail } from '@/utils/helpers';
 
 export const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-  });
-
-  const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!isValidEmail(formData.email)) {
-      newErrors.email = 'Invalid email address';
-    }
-    if (!formData.message.trim()) newErrors.message = 'Message is required';
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validateForm();
-    
-    if (Object.keys(newErrors).length === 0) {
-      setSubmitted(true);
-      setTimeout(() => {
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-        setSubmitted(false);
-      }, 3000);
-    } else {
-      setErrors(newErrors);
-    }
-  };
-
   // LocalBusiness Schema for Google Maps and local search
   const localBusinessSchema = {
     "@context": "https://schema.org",
@@ -108,210 +59,113 @@ export const Contact = () => {
         ogImage={`${SEO_CONFIG.siteUrl}/og-contact.jpg`}
         schema={localBusinessSchema}
       />
-      <main className="pt-20">
-      <Section className="bg-gradient-to-br from-primary-50 to-secondary-50">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-block bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-            Get In Touch
+      <main className="pt-20 bg-gray-50 min-h-screen">
+        {/* Header */}
+        <Section className="bg-gradient-to-b from-white to-gray-50 pt-20 pb-12">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-block bg-white text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-6 border border-primary-100 shadow-sm">
+              Get In Touch
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold font-heading text-gray-900 mb-6">
+              Contact <span className="text-primary-600">Us</span>
+            </h1>
+            <p className="text-xl text-gray-600 font-medium max-w-2xl mx-auto">
+              We'd love to hear from you. Visit our office, give us a call, or send us an email.
+            </p>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold font-heading text-gray-900 mb-6">
-            Contact Us
-          </h1>
-          <p className="text-xl text-gray-600">
-            We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-          </p>
-        </div>
-      </Section>
+        </Section>
 
-      <Section className="bg-white">
-        <div className="grid lg:grid-cols-3 gap-8 mb-12">
-          <Card hover>
-            <CardHeader>
-              <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center mb-4">
-                <Phone className="w-7 h-7 text-white" />
+        <Section className="bg-gray-50 pt-0">
+          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:border-primary-100 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 text-primary-600 group-hover:scale-110 transition-transform">
+                <Phone className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900">Phone</h3>
-            </CardHeader>
-            <CardBody>
-              <a href={`tel:${COMPANY_INFO.phone}`} className="text-gray-600 hover:text-primary-600 transition-colors block mb-2">
-                {COMPANY_INFO.phone}
-              </a>
-              <a href={`tel:${COMPANY_INFO.mobile}`} className="text-gray-600 hover:text-primary-600 transition-colors block">
-                {COMPANY_INFO.mobile}
-              </a>
-            </CardBody>
-          </Card>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Phone</h3>
+              <div className="space-y-3">
+                <a href={`tel:${COMPANY_INFO.phone}`} className="block text-gray-600 hover:text-primary-600 transition-colors font-medium">
+                  {COMPANY_INFO.phone}
+                </a>
+                <a href={`tel:${COMPANY_INFO.mobile}`} className="block text-gray-600 hover:text-primary-600 transition-colors font-medium">
+                  {COMPANY_INFO.mobile}
+                </a>
+              </div>
+            </div>
 
-          <Card hover>
-            <CardHeader>
-              <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center mb-4">
-                <Mail className="w-7 h-7 text-white" />
+            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:border-primary-100 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-secondary-50 rounded-2xl flex items-center justify-center mb-6 text-secondary-600 group-hover:scale-110 transition-transform">
+                <Mail className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900">Email</h3>
-            </CardHeader>
-            <CardBody>
-              <a href={`mailto:${COMPANY_INFO.email}`} className="text-gray-600 hover:text-primary-600 transition-colors">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Email</h3>
+              <a href={`mailto:${COMPANY_INFO.email}`} className="text-gray-600 hover:text-secondary-600 transition-colors font-medium text-lg">
                 {COMPANY_INFO.email}
               </a>
-            </CardBody>
-          </Card>
+              <p className="text-gray-500 text-sm mt-4">
+                For general inquiries and distributor information.
+              </p>
+            </div>
 
-          <Card hover>
-            <CardHeader>
-              <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center mb-4">
-                <MapPin className="w-7 h-7 text-white" />
+            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-lg hover:border-primary-100 transition-all duration-300 group">
+              <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center mb-6 text-gray-700 group-hover:scale-110 transition-transform">
+                <MapPin className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900">Address</h3>
-            </CardHeader>
-            <CardBody>
-              <p className="text-gray-600">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Office</h3>
+              <p className="text-gray-600 font-medium leading-relaxed">
                 {COMPANY_INFO.address}
               </p>
-            </CardBody>
-          </Card>
-        </div>
-
-        <div className="grid lg:grid-cols-5 gap-8">
-          <div className="lg:col-span-3">
-            <Card>
-              <CardHeader>
-                <h2 className="text-2xl font-bold text-gray-900">Send us a Message</h2>
-                <p className="text-gray-600 mt-2">Fill out the form below and we'll get back to you shortly.</p>
-              </CardHeader>
-              <CardBody>
-                {submitted && (
-                  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                    Thank you for your message! We'll get back to you soon.
-                  </div>
-                )}
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.name ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all`}
-                      placeholder="Your name"
-                    />
-                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all`}
-                        placeholder="your@email.com"
-                      />
-                      {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                    </div>
-
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                        placeholder="+63 XXX XXX XXXX"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                      placeholder="How can we help?"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows="6"
-                      className={`w-full px-4 py-3 rounded-lg border ${errors.message ? 'border-red-500' : 'border-gray-300'} focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none`}
-                      placeholder="Your message..."
-                    ></textarea>
-                    {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
-                  </div>
-
-                  <Button type="submit" size="lg" className="w-full group">
-                    <Send className="mr-2 w-5 h-5" />
-                    Send Message
-                  </Button>
-                </form>
-              </CardBody>
-            </Card>
+            </div>
           </div>
 
-          <div className="lg:col-span-2 space-y-6">
-            <Card>
-              <CardHeader>
-                <div className="flex items-center space-x-3 mb-4">
-                  <Clock className="w-6 h-6 text-primary-600" />
-                  <h3 className="text-xl font-semibold text-gray-900">Business Hours</h3>
-                </div>
-              </CardHeader>
-              <CardBody>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Monday - Friday</span>
-                    <span className="font-medium text-gray-900">8:00 AM - 5:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Saturday</span>
-                    <span className="font-medium text-gray-900">8:00 AM - 12:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Sunday</span>
-                    <span className="font-medium text-gray-900">Closed</span>
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
+          <div className="grid lg:grid-cols-5 gap-8">
+            {/* Map occupying larger space since form is gone */}
+            <div className="lg:col-span-3 h-[500px] lg:h-auto min-h-[500px] rounded-3xl overflow-hidden shadow-lg border border-white relative z-0">
+              <iframe
+                title="NGOSIOK MARKETING Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.4937!2d123.9!3d10.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDE4JzAwLjAiTiAxMjPCsDU0JzAwLjAiRQ!5e0!3m2!1sen!2sph!4v1234567890!5m2!1sen!2sph&q=325+B.+Aranas+Street,+Cebu+City+6000,+Philippines"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0 w-full h-full grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+              />
+            </div>
 
-            <Card className="bg-gradient-to-br from-primary-600 to-secondary-600 text-white">
-              <CardHeader>
-                <h3 className="text-xl font-semibold">Follow Us</h3>
-                <p className="text-primary-100 mt-2">Stay updated with our latest products and news</p>
-              </CardHeader>
-              <CardBody>
+            <div className="lg:col-span-2 space-y-8 flex flex-col">
+              <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex-1">
+                <div className="flex items-center space-x-3 mb-6">
+                  <Clock className="w-6 h-6 text-primary-600" />
+                  <h3 className="text-xl font-bold text-gray-900">Business Hours</h3>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center pb-3 border-b border-gray-50">
+                    <span className="text-gray-600 font-medium">Monday - Friday</span>
+                    <span className="font-bold text-gray-900">8:00 AM - 5:00 PM</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-3 border-b border-gray-50">
+                    <span className="text-gray-600 font-medium">Saturday</span>
+                    <span className="font-bold text-gray-900">8:00 AM - 12:00 PM</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-600 font-medium">Sunday</span>
+                    <span className="font-bold text-gray-900 bg-red-50 text-red-600 px-3 py-1 rounded-full text-xs uppercase tracking-wider">Closed</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-primary-600 to-primary-700 text-white p-8 rounded-3xl shadow-lg relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl translate-x-10 -translate-y-10"></div>
+
+                <h3 className="text-xl font-bold mb-2">Connect Socially</h3>
+                <p className="text-primary-100 mb-6 text-sm">Stay updated with our latest news and announcements.</p>
+
                 <div className="flex space-x-4">
                   <a
                     href={SOCIAL_LINKS.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                    className="w-12 h-12 rounded-xl bg-white/20 hover:bg-white flex items-center justify-center transition-all duration-300 hover:text-primary-700 group"
                   >
                     <Facebook className="w-6 h-6" />
                   </a>
@@ -319,17 +173,16 @@ export const Contact = () => {
                     href={SOCIAL_LINKS.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                    className="w-12 h-12 rounded-xl bg-white/20 hover:bg-white flex items-center justify-center transition-all duration-300 hover:text-primary-700 group"
                   >
                     <Instagram className="w-6 h-6" />
                   </a>
                 </div>
-              </CardBody>
-            </Card>
+              </div>
+            </div>
           </div>
-        </div>
-      </Section>
-    </main>
+        </Section>
+      </main>
     </>
   );
 };

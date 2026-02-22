@@ -1,211 +1,132 @@
 import { Link } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Section } from '@/components/common/Section';
 import { Button } from '@/components/common/Button';
-import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, MessageSquare, ExternalLink } from 'lucide-react';
 import { COMPANY_INFO } from '@/utils/constants';
-import { fadeUpVariants, slideInLeftVariants, slideInRightVariants, defaultViewport } from '@/utils/animations';
+import { fadeUpVariants, defaultViewport } from '@/utils/animations';
 
 export const Contact = () => {
   return (
-    <Section className="bg-gradient-to-br from-primary-600 to-secondary-600 text-white">
-      <div className="grid lg:grid-cols-2 gap-12 items-start">
+    <Section className="bg-primary-700 text-white relative overflow-hidden">
+      {/* Background decorations - Subtle texture & Logo Pattern */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start relative z-10">
         {/* Left Column - Contact Info */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={defaultViewport}
-          variants={slideInLeftVariants}
+          variants={fadeUpVariants}
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-6">
-            Let's Connect
+          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-bold mb-6 border border-white/20 shadow-sm">
+            <MessageSquare className="w-4 h-4" />
+            <span>Get in Touch</span>
+          </div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6 leading-tight text-white">
+            Let's Start a<br />
+            <span className="text-primary-200">Conversation</span>
           </h2>
-          <p className="text-xl text-primary-100 mb-8">
-            Have questions about our products or want to become a distributor? 
-            We'd love to hear from you.
+
+          <p className="text-lg text-primary-50 mb-8 leading-relaxed font-medium">
+            Have questions about our products or want to become a distributor?
+            We'd love to hear from you. Our team is ready to assist you.
           </p>
 
-          <div className="space-y-6 mb-8">
-            {/* Phone */}
+          <div className="grid gap-4 mb-8">
+            {/* Phone Card */}
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={defaultViewport}
+              custom={1}
               variants={fadeUpVariants}
-              custom={0}
-              className="flex items-start space-x-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 hover:bg-white/20 transition-all duration-300"
+              className="group flex items-center space-x-4 p-4 bg-white rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center flex-shrink-0">
+              <div className="flex-shrink-0 w-12 h-12 bg-primary-50 text-primary-600 rounded-lg flex items-center justify-center group-hover:bg-primary-600 group-hover:text-white transition-colors">
                 <Phone className="w-6 h-6" />
               </div>
               <div>
-                <div className="font-semibold mb-1">Phone</div>
-                <a href={`tel:${COMPANY_INFO.phone}`} className="text-primary-100 hover:text-white transition-colors">
-                  {COMPANY_INFO.phone}
-                </a>
-                <br />
-                <a href={`tel:${COMPANY_INFO.mobile}`} className="text-primary-100 hover:text-white transition-colors">
-                  {COMPANY_INFO.mobile}
-                </a>
+                <div className="font-bold text-gray-900 mb-1">Call Us</div>
+                <div className="flex flex-col sm:flex-row sm:space-x-4 text-gray-600">
+                  <a href={`tel:${COMPANY_INFO.phone}`} className="hover:text-primary-600 transition-colors font-medium">
+                    {COMPANY_INFO.phone}
+                  </a>
+                  <span className="hidden sm:inline text-gray-300">|</span>
+                  <a href={`tel:${COMPANY_INFO.mobile}`} className="hover:text-primary-600 transition-colors font-medium">
+                    {COMPANY_INFO.mobile}
+                  </a>
+                </div>
               </div>
             </motion.div>
 
-            {/* Email */}
+            {/* Email Card */}
             <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={defaultViewport}
+              custom={2}
               variants={fadeUpVariants}
-              custom={1}
-              className="flex items-start space-x-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 hover:bg-white/20 transition-all duration-300"
+              className="group flex items-center space-x-4 p-4 bg-white rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center flex-shrink-0">
+              <div className="flex-shrink-0 w-12 h-12 bg-secondary-50 text-secondary-600 rounded-lg flex items-center justify-center group-hover:bg-secondary-600 group-hover:text-white transition-colors">
                 <Mail className="w-6 h-6" />
               </div>
               <div>
-                <div className="font-semibold mb-1">Email</div>
-                <a href={`mailto:${COMPANY_INFO.email}`} className="text-primary-100 hover:text-white transition-colors">
+                <div className="font-bold text-gray-900 mb-1">Email Us</div>
+                <a href={`mailto:${COMPANY_INFO.email}`} className="text-gray-600 hover:text-secondary-600 transition-colors font-medium block">
                   {COMPANY_INFO.email}
                 </a>
               </div>
             </motion.div>
-          </div>
 
-          {/* Interactive Map */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={defaultViewport}
-            variants={fadeUpVariants}
-            custom={2}
-            className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 hover:bg-white/15 transition-all duration-300"
-          >
-            <div className="flex items-center space-x-3 mb-3">
-              <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-5 h-5" />
+            {/* Address Card */}
+            <motion.div
+              custom={3}
+              variants={fadeUpVariants}
+              className="group flex items-start space-x-4 p-4 bg-white rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition-all duration-300"
+            >
+              <div className="flex-shrink-0 w-12 h-12 bg-gray-50 text-gray-600 rounded-lg flex items-center justify-center group-hover:bg-gray-800 group-hover:text-white transition-colors">
+                <MapPin className="w-6 h-6" />
               </div>
               <div>
-                <div className="font-semibold text-sm">Visit Us</div>
-                <p className="text-primary-100 text-sm">
+                <div className="font-bold text-gray-900 mb-1">Visit Us</div>
+                <p className="text-gray-600 font-medium leading-snug">
                   {COMPANY_INFO.address}
                 </p>
               </div>
-            </div>
-            
-            {/* Embedded Google Map */}
-            <div className="relative w-full h-64 rounded-lg overflow-hidden border border-white/20 shadow-lg">
-              <iframe
-                title="NGOSIOK MARKETING Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.4937!2d123.9!3d10.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDE4JzAwLjAiTiAxMjPCsDU0JzAwLjAiRQ!5e0!3m2!1sen!2sph!4v1234567890!5m2!1sen!2sph&q=325+B.+Aranas+Street,+Cebu+City+6000,+Philippines"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale-[30%] brightness-90 contrast-110 hover:grayscale-0 transition-all duration-500"
-              />
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
+
         </motion.div>
 
-        {/* Right Column - Contact Form */}
+        {/* Right Column - Map */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={defaultViewport}
-          variants={slideInRightVariants}
-          className="bg-white rounded-2xl p-8 shadow-2xl"
+          variants={fadeUpVariants}
+          custom={2}
+          className="relative h-full min-h-[400px] lg:min-h-[500px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20"
         >
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Send us a message
-          </h3>
-          <form className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                placeholder="Your name"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                placeholder="your@email.com"
-              />
-            </div>
-            
-            {/* Inquiry Type Selector */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
-                What is this about?
-              </label>
-              <div className="space-y-2">
-                <label className="flex items-center p-3 rounded-lg border border-gray-200 hover:border-primary-300 hover:bg-primary-50/50 cursor-pointer transition-all group">
-                  <input
-                    type="radio"
-                    name="inquiryType"
-                    value="general"
-                    className="w-4 h-4 text-primary-600 border-gray-300 focus:ring-primary-500"
-                    defaultChecked
-                  />
-                  <span className="ml-3 text-sm text-gray-700 group-hover:text-gray-900 font-medium">
-                    General Question
-                  </span>
-                </label>
-                <label className="flex items-center p-3 rounded-lg border border-gray-200 hover:border-primary-300 hover:bg-primary-50/50 cursor-pointer transition-all group">
-                  <input
-                    type="radio"
-                    name="inquiryType"
-                    value="distributor"
-                    className="w-4 h-4 text-primary-600 border-gray-300 focus:ring-primary-500"
-                  />
-                  <span className="ml-3 text-sm text-gray-700 group-hover:text-gray-900 font-medium">
-                    Distributor Inquiry
-                  </span>
-                </label>
-                <label className="flex items-center p-3 rounded-lg border border-gray-200 hover:border-primary-300 hover:bg-primary-50/50 cursor-pointer transition-all group">
-                  <input
-                    type="radio"
-                    name="inquiryType"
-                    value="feedback"
-                    className="w-4 h-4 text-primary-600 border-gray-300 focus:ring-primary-500"
-                  />
-                  <span className="ml-3 text-sm text-gray-700 group-hover:text-gray-900 font-medium">
-                    Product Feedback
-                  </span>
-                </label>
-              </div>
-            </div>
+          <iframe
+            title="NGOSIOK MARKETING Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.4937!2d123.9!3d10.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDE4JzAwLjAiTiAxMjPCsDU0JzAwLjAiRQ!5e0!3m2!1sen!2sph!4v1234567890!5m2!1sen!2sph&q=325+B.+Aranas+Street,+Cebu+City+6000,+Philippines"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="absolute inset-0 w-full h-full grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+          />
 
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows="4"
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
-                placeholder="Your message..."
-              ></textarea>
-            </div>
-            <Button type="submit" size="lg" className="w-full group">
-              Send Message
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </form>
-          <p className="text-center text-sm text-gray-600 mt-4">
-            Or <Link to="/contact" className="text-primary-600 hover:underline font-medium">visit our contact page</Link>
-          </p>
+          {/* Overlay Badge */}
+          <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-lg max-w-[200px] hidden sm:block border border-gray-100">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Located in</p>
+            <p className="font-bold text-primary-700 flex items-center gap-1">
+              Cebu City, Philippines
+              <ExternalLink className="w-3 h-3 text-gray-400" />
+            </p>
+          </div>
         </motion.div>
       </div>
     </Section>

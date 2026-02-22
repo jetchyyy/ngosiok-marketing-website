@@ -1,14 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
-import { Card, CardHeader, CardBody } from '@/components/common/Card';
+import { Button } from '@/components/common/Button';
 import { products } from '@/data/products';
-import { Package, CheckCircle } from 'lucide-react';
+import { ArrowRight, Star, X, Check, Phone, MessageCircle } from 'lucide-react';
 import { classNames } from '@/utils/helpers';
-import { SEO_CONFIG } from '@/utils/constants';
+import { SEO_CONFIG, COMPANY_INFO } from '@/utils/constants';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedProduct) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedProduct]);
 
   const categories = [
     { id: 'all', name: 'All Products' },
@@ -16,8 +31,8 @@ export const Products = () => {
     { id: 'Wheat-based Noodles', name: 'Wheat-based' },
   ];
 
-  const filteredProducts = selectedCategory === 'all' 
-    ? products 
+  const filteredProducts = selectedCategory === 'all'
+    ? products
     : products.filter(p => p.category === selectedCategory);
 
   // Breadcrumb Schema
@@ -49,96 +64,221 @@ export const Products = () => {
         ogImage={`${SEO_CONFIG.siteUrl}/og-products.jpg`}
         schema={breadcrumbSchema}
       />
-      <main className="pt-20">
-      <Section className="bg-gradient-to-br from-secondary-50 to-primary-50">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-block bg-secondary-100 text-secondary-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-            Our Products
+      <main className="pt-20 bg-gray-50 min-h-screen">
+        {/* Hero Section */}
+        <Section className="bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+          {/* Background decorations */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100/30 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-100/30 rounded-full blur-3xl -z-10 -translate-x-1/3 translate-y-1/3"></div>
+
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-block bg-white text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-6 border border-primary-100 shadow-sm">
+              Our Collection
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold font-heading text-gray-900 mb-6">
+              Premium Quality <span className="text-primary-600">Noodles</span>
+            </h1>
+            <p className="text-xl text-gray-600 font-medium max-w-2xl mx-auto">
+              Discover our range of traditional and innovative noodle products,
+              crafted with care and dedication.
+            </p>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold font-heading text-gray-900 mb-6">
-            Premium Quality Noodles
-          </h1>
-          <p className="text-xl text-gray-600">
-            Discover our range of traditional and innovative noodle products, 
-            crafted with care and dedication
-          </p>
-        </div>
-      </Section>
+        </Section>
 
-      <Section className="bg-white">
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={classNames(
-                'px-6 py-3 rounded-lg font-medium transition-all duration-300',
-                selectedCategory === category.id
-                  ? 'bg-primary-600 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              )}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
+        <Section className="bg-gray-50 pt-0">
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={classNames(
+                  'px-6 py-3 rounded-full font-bold transition-all duration-300 border',
+                  selectedCategory === category.id
+                    ? 'bg-primary-600 text-white shadow-lg border-primary-600'
+                    : 'bg-white text-gray-600 border-gray-200 hover:border-primary-200 hover:text-primary-600 hover:shadow-sm'
+                )}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <Card key={product.id} hover>
-              <div className="h-64 bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                <Package className="w-32 h-32 text-primary-400 relative z-10" />
-                <div className="absolute bottom-4 left-4 right-4 z-10">
-                  <div className="inline-block bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-xs font-medium">
-                    {product.category}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            {filteredProducts.map((product) => (
+              <div key={product.id} className="group flex flex-col h-full">
+                {/* Image Container - The "Card" part */}
+                <div
+                  className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-white mb-5 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100 group-hover:border-primary-100 group-hover:-translate-y-2 cursor-pointer"
+                  onClick={() => setSelectedProduct(product)}
+                >
+                  {/* Floating Badge */}
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="bg-white/95 backdrop-blur-md text-primary-700 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm border border-primary-100 flex items-center gap-1">
+                      <Star className="w-3 h-3 fill-primary-600 text-primary-600" />
+                      {product.category}
+                    </span>
+                  </div>
+
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Quick View Button (Overlay) */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+                    <span className="bg-white text-gray-900 px-6 py-3 rounded-full font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      View Details
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content - Below Image */}
+                <div className="flex-1 flex flex-col px-2">
+                  <h3
+                    className="text-2xl font-bold text-gray-900 mb-2 font-heading group-hover:text-primary-600 transition-colors cursor-pointer"
+                    onClick={() => setSelectedProduct(product)}
+                  >
+                    {product.name}
+                  </h3>
+
+                  <p className="text-gray-600 mb-4 line-clamp-2 font-medium text-sm leading-relaxed">
+                    {product.description}
+                  </p>
+
+                  <div className="mt-auto">
+                    <ul className="flex flex-wrap gap-2">
+                      {product.features.slice(0, 3).map((feature, idx) => (
+                        <li key={idx} className="flex items-center text-xs font-semibold text-primary-700 bg-primary-50 px-2 py-1 rounded-md">
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
-              
-              <CardHeader>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-                  {product.name}
-                </h3>
-                <p className="text-gray-600">
-                  {product.description}
-                </p>
-              </CardHeader>
-              
-              <CardBody>
-                <h4 className="font-semibold text-gray-900 mb-3">Key Features:</h4>
-                <ul className="space-y-2">
-                  {product.features.map((feature, index) => (
-                    <li key={index} className="flex items-start space-x-2">
-                      <CheckCircle className="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardBody>
-            </Card>
-          ))}
-        </div>
-      </Section>
+            ))}
+          </div>
+        </Section>
 
-      <Section className="bg-gradient-to-br from-primary-600 to-secondary-600 text-white">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold font-heading mb-6">
-            Interested in Our Products?
-          </h2>
-          <p className="text-xl text-primary-100 mb-8">
-            Contact us to learn more about our distribution options, 
-            bulk orders, or to become a retail partner.
-          </p>
-          <a
-            href="mailto:sales@ngosiokmarketing.com"
-            className="inline-block bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-          >
-            Get in Touch
-          </a>
-        </div>
-      </Section>
-    </main>
+        {/* Call to Action Section - Light Theme */}
+        <Section className="bg-white border-t border-gray-100">
+          <div className="text-center max-w-4xl mx-auto rounded-3xl bg-gray-50 p-12 border border-gray-100">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-6">
+              Interested in Our Products?
+            </h2>
+            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+              Contact us to learn more about our distribution options,
+              bulk orders, or to become a retail partner.
+            </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center space-x-2 bg-primary-600 text-white px-8 py-4 rounded-full font-bold hover:bg-primary-700 transition-colors shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40"
+            >
+              <span>Get in Touch</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+        </Section>
+      </main>
+
+      {/* Product Details Modal */}
+      <AnimatePresence>
+        {selectedProduct && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProduct(null)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            >
+              {/* Modal Content */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                onClick={(e) => e.stopPropagation()}
+                className="bg-white rounded-3xl overflow-hidden shadow-2xl w-full max-w-5xl max-h-[90vh] flex flex-col md:flex-row relative"
+              >
+                {/* Close Button */}
+                <button
+                  onClick={() => setSelectedProduct(null)}
+                  className="absolute top-4 right-4 z-20 bg-white/50 hover:bg-white text-gray-700 hover:text-gray-900 p-2 rounded-full backdrop-blur-md transition-all duration-300 hover:rotate-90 shadow-sm"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+
+                {/* Left Side - Image */}
+                <div className="w-full md:w-1/2 h-64 md:h-auto relative bg-gray-100">
+                  <img
+                    src={selectedProduct.image}
+                    alt={selectedProduct.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none md:hidden" />
+                </div>
+
+                {/* Right Side - Details */}
+                <div className="w-full md:w-1/2 p-8 md:p-10 flex flex-col overflow-y-auto">
+                  <div className="mb-6">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+                      <Star className="w-3.5 h-3.5 fill-primary-600" />
+                      {selectedProduct.category}
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-4 leading-tight">
+                      {selectedProduct.name}
+                    </h2>
+                    <p className="text-gray-600 text-lg leading-relaxed">
+                      {selectedProduct.description}
+                    </p>
+                  </div>
+
+                  <div className="mb-8">
+                    <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">
+                      Key Features
+                    </h3>
+                    <ul className="grid grid-cols-1 gap-3">
+                      {selectedProduct.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start">
+                          <div className="bg-green-100 rounded-full p-1 mr-3 mt-0.5">
+                            <Check className="w-3 h-3 text-green-600" />
+                          </div>
+                          <span className="text-gray-700 font-medium">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-auto pt-6 border-t border-gray-100">
+                    <p className="text-sm text-gray-500 mb-4">
+                      Interested in this product? Contact our sales team for pricing and availability.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Link
+                        to="/contact"
+                        className="flex-1 inline-flex justify-center items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-primary-700 transition-colors shadow-lg shadow-primary/20"
+                      >
+                        <Phone className="w-5 h-5" />
+                        Call Now
+                      </Link>
+                      <Link
+                        to="/contact"
+                        className="flex-1 inline-flex justify-center items-center gap-2 bg-white text-gray-800 border-2 border-gray-200 px-6 py-3 rounded-xl font-bold hover:border-primary-600 hover:text-primary-600 transition-all"
+                      >
+                        <MessageCircle className="w-5 h-5" />
+                        Enquire
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

@@ -1,144 +1,184 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Section } from '@/components/common/Section';
 import { motion, AnimatePresence } from 'framer-motion';
-import BounceCards from '@/components/common/BounceCards';
 import { features } from '@/data/features';
-import { fadeUpVariants, contentSwitchVariants, defaultViewport } from '@/utils/animations';
+import { contentSwitchVariants, defaultViewport } from '@/utils/animations';
+import { ArrowRight, Pause, Play, CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/common/Button';
 
 export const Features = () => {
   const [activeFeature, setActiveFeature] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const PROGRESS_DURATION = 5000; // 5 seconds per slide
+  const [progress, setProgress] = useState(0);
 
   // Prepare images array from features data
   const featureImages = features.map(feature => feature.image || '/ngosiok.jpg');
 
+  useEffect(() => {
+    let startTime = Date.now();
+    let animationFrameId;
+
+    const animate = () => {
+      if (!isPaused) {
+        const elapsed = Date.now() - startTime;
+        const newProgress = (elapsed / PROGRESS_DURATION) * 100;
+
+        if (newProgress >= 100) {
+          setActiveFeature((prev) => (prev + 1) % features.length);
+          startTime = Date.now();
+          setProgress(0);
+        } else {
+          setProgress(newProgress);
+        }
+      } else {
+        startTime = Date.now() - (progress / 100) * PROGRESS_DURATION;
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [isPaused, features.length]);
+
+  const handleManualChange = (index) => {
+    setActiveFeature(index);
+    setProgress(0);
+  };
+
   return (
-    <Section className="bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-secondary-100/20 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-100/20 rounded-full blur-3xl -z-10"></div>
+    <Section className="relative overflow-hidden bg-primary-700 text-white py-24 md:py-32">
+      {/* Background decorations - Subtle texture */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-      {/* Header */}
-      <motion.div
-        custom={0}
-        variants={fadeUpVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={defaultViewport}
-        className="text-center mb-16"
+      <div
+        className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center max-w-7xl mx-auto relative z-10"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-secondary-50 to-secondary-100 text-secondary-700 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-secondary-200/50">
-          <span>Why Choose Us</span>
-        </div>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6 leading-tight">
-          <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
-            What Sets Us
-          </span>
-          <br />
-          <span className="bg-gradient-to-r from-secondary-600 to-secondary-700 bg-clip-text text-transparent">
-            Apart
-          </span>
-        </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Decades of experience combined with modern innovation to deliver the best noodle products
-        </p>
-      </motion.div>
-
-      {/* Interactive Two-Column Layout */}
-      <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center max-w-7xl mx-auto mt-8">
-        {/* Left Column - BounceCards */}
+        {/* Left Column - Large Image Slideshow */}
         <motion.div
-          custom={1}
-          variants={fadeUpVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={defaultViewport}
-          className="flex justify-center items-center order-2 lg:order-1 py-16 lg:py-24"
+          transition={{ duration: 0.6 }}
+          className="relative order-1"
         >
-          <div className="relative w-full max-w-[600px]">
-            {/* Glassmorphic container */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-white/20 backdrop-blur-sm rounded-3xl -z-10 transform scale-110"></div>
-            
-            <BounceCards
-              images={featureImages}
-              containerWidth={600}
-              containerHeight={600}
-              enableHover={true}
-              onCardHover={(index) => setActiveFeature(index)}
-              transformStyles={[
-                'rotate(10deg) translate(-240px)',
-                'rotate(5deg) translate(-120px)',
-                'rotate(-3deg)',
-                'rotate(-10deg) translate(120px)',
-              ]}
-            />
+          <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeFeature}
+                src={featureImages[activeFeature]}
+                alt={features[activeFeature].title}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.7 }}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </AnimatePresence>
 
-            {/* Feature indicators */}
-            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 flex gap-3">
-              {features.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveFeature(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    activeFeature === index 
-                      ? 'bg-secondary-600 w-10' 
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                  aria-label={`View feature ${index + 1}`}
-                />
-              ))}
+            {/* Gradient overlay for text legibility if needed */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+
+            {/* pause/play indicator */}
+            <div className="absolute top-4 right-4 bg-black/30 backdrop-blur-md rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer text-white" onClick={() => setIsPaused(!isPaused)}>
+              {isPaused ? <Play size={20} fill="currentColor" /> : <Pause size={20} fill="currentColor" />}
             </div>
           </div>
+
+          {/* Decorative element behind */}
+          <div className="absolute -z-10 top-8 -left-8 w-full h-full bg-white/5 rounded-3xl border border-white/10 hidden md:block"></div>
         </motion.div>
 
-        {/* Right Column - Dynamic Text */}
+        {/* Right Column - Dynamic Content */}
         <motion.div
-          custom={2}
-          variants={fadeUpVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={defaultViewport}
-          className="order-1 lg:order-2 lg:pl-8"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="order-2 lg:pl-8 flex flex-col h-full justify-center"
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeFeature}
-              variants={contentSwitchVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              {/* Icon */}
-              <div className="relative mb-6 w-fit">
-                <div className="absolute inset-0 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-2xl blur-lg opacity-50"></div>
-                <div className="relative w-16 h-16 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-2xl flex items-center justify-center shadow-lg ring-2 ring-white/50">
-                  {(() => {
-                    const Icon = features[activeFeature].icon;
-                    return <Icon className="w-8 h-8 text-white" />;
-                  })()}
+          <div className="min-h-[400px] flex flex-col justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeFeature}
+                variants={contentSwitchVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                {/* Header Badge */}
+                <div className="inline-block bg-white text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-8 shadow-lg">
+                  Why Choose Us
                 </div>
-              </div>
 
-              {/* Title */}
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                {/* Title */}
+                <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-white mb-6 leading-tight">
                   {features[activeFeature].title}
-                </span>
-              </h3>
+                </h3>
 
-              {/* Description */}
-              <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                {features[activeFeature].description}
-              </p>
+                {/* Description */}
+                <p className="text-lg md:text-xl text-primary-50 leading-relaxed mb-8 font-medium opacity-90">
+                  {features[activeFeature].description}
+                </p>
 
-              {/* Feature number indicator */}
-              <div className="flex items-center gap-3">
-                <div className="text-6xl font-bold bg-gradient-to-r from-secondary-200 to-secondary-300 bg-clip-text text-transparent">
-                  {String(activeFeature + 1).padStart(2, '0')}
+                {/* Feature List/Highlights (Optional addition for detail) */}
+                <ul className="space-y-3 mb-10">
+                  <li className="flex items-center text-white/90">
+                    <CheckCircle2 className="w-5 h-5 mr-3 text-secondary-400" />
+                    <span className="font-medium">Premium ingredients tailored for Filipino taste</span>
+                  </li>
+                  <li className="flex items-center text-white/90">
+                    <CheckCircle2 className="w-5 h-5 mr-3 text-secondary-400" />
+                    <span className="font-medium">Trusted by households for generations</span>
+                  </li>
+                </ul>
+
+                <Link to="/about">
+                  <Button variant="white" size="lg" className="shadow-xl hover:scale-105 font-bold px-8">
+                    Learn More
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Progress Indicators */}
+          <div className="flex gap-4 mt-12 pt-8 border-t border-white/10">
+            {features.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleManualChange(index)}
+                className="group flex-1 focus:outline-none"
+              >
+                <div className="flex flex-col gap-3">
+                  <span className={`text-xs font-bold uppercase tracking-wider transition-colors duration-300 ${activeFeature === index ? 'text-white' : 'text-white/40 group-hover:text-white/70'}`}>
+                    0{index + 1}
+                  </span>
+                  <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden relative">
+                    {/* Background track */}
+                    <div className={`absolute inset-0 bg-white/10 transition-colors duration-300 ${activeFeature === index ? 'bg-white/20' : ''}`} />
+
+                    {/* Progress Fill */}
+                    {activeFeature === index && (
+                      <motion.div
+                        className="absolute inset-y-0 left-0 bg-secondary-400"
+                        style={{ width: `${progress}%` }}
+                        transition={{ duration: 0 }} // Controlled by state
+                      />
+                    )}
+                  </div>
                 </div>
-                <div className="h-px flex-1 bg-gradient-to-r from-secondary-200 to-transparent"></div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              </button>
+            ))}
+          </div>
         </motion.div>
       </div>
     </Section>
