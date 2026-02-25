@@ -114,7 +114,7 @@ export const Header = () => {
 
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="md:hidden p-2.5 rounded-xl hover:bg-primary-50 active:bg-primary-100 transition-colors border border-gray-200 hover:border-primary-200"
+                  className="md:hidden p-2.5 rounded-xl hover:bg-primary-50 active:bg-primary-100 transition-colors"
                   aria-label="Toggle menu"
                 >
                   {mobileMenuOpen ? (

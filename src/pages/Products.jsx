@@ -222,16 +222,16 @@ export const Products = () => {
                 </div>
 
                 {/* Right Side - Details */}
-                <div className="w-full md:w-1/2 p-5 sm:p-8 md:p-10 flex flex-col overflow-hidden">
+                <div className="w-full md:w-1/2 p-5 sm:p-8 md:p-10 flex flex-col overflow-y-auto">
                   <div className="mb-3 md:mb-6">
                     <span className="inline-flex items-center gap-1 md:gap-1.5 px-2 py-1 md:px-3 md:py-1 bg-primary-50 text-primary-700 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-4">
                       <Star className="w-3 h-3 md:w-3.5 md:h-3.5 fill-primary-600" />
                       {selectedProduct.category}
                     </span>
-                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-heading text-gray-900 mb-1 sm:mb-2 md:mb-4 leading-tight line-clamp-1 md:line-clamp-none">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-heading text-gray-900 mb-1 sm:mb-2 md:mb-4 leading-tight">
                       {selectedProduct.name}
                     </h2>
-                    <p className="text-gray-600 text-xs sm:text-sm md:text-lg leading-relaxed line-clamp-2 md:line-clamp-none">
+                    <p className="text-gray-600 text-xs sm:text-sm md:text-lg leading-relaxed">
                       {selectedProduct.description}
                     </p>
                   </div>
