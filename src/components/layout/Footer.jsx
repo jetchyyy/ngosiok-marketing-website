@@ -154,28 +154,36 @@ export const Footer = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="border-t border-white/10 py-6"
         >
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm">
-            <p className="text-gray-400 text-center md:text-left">
-              © {currentYear} <span className="text-white font-semibold">{COMPANY_INFO.name}</span>. All rights reserved.
-              <br className="md:hidden" />
-              <span className="hidden md:inline"> | </span>
-              <a
-                href="https://www.facebook.com/profile.php?id=61587269647950"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-400 hover:text-primary-300 transition-colors inline-block mt-2 md:mt-0"
-              >
-                Created by ODC
-              </a>
-            </p>
-            <div className="flex items-center space-x-6 text-gray-400">
-              <Link to="/privacy" className="hover:text-primary-400 transition-colors">
-                Privacy Policy
-              </Link>
-              <span className="text-gray-600">•</span>
-              <Link to="/terms" className="hover:text-primary-400 transition-colors">
-                Terms of Service
-              </Link>
+          <div className="flex flex-col items-center justify-center space-y-4">
+            <div className="flex flex-col md:flex-row justify-between items-center w-full space-y-4 md:space-y-0 text-sm">
+              <div className="text-gray-400 text-center md:text-left">
+                <span>
+                  © {currentYear} <span className="text-white font-semibold">{COMPANY_INFO.name}</span>. All rights reserved.
+                </span>
+              </div>
+              <div className="flex items-center space-x-6 text-gray-400">
+                <Link to="/privacy" className="hover:text-primary-400 transition-colors">
+                  Privacy Policy
+                </Link>
+                <span className="text-gray-600">•</span>
+                <Link to="/terms" className="hover:text-primary-400 transition-colors">
+                  Terms of Service
+                </Link>
+              </div>
+            </div>
+
+            <div className="text-gray-500 text-xs md:text-sm text-center pt-2">
+              <span className="flex items-center justify-center gap-1.5">
+                Created by
+                <a
+                  href="https://www.facebook.com/profile.php?id=61587269647950"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white font-bold hover:text-primary-400 transition-colors border-b border-white hover:border-primary-400 flex items-center gap-1"
+                >
+                  ODC
+                </a>
+              </span>
             </div>
           </div>
         </motion.div>

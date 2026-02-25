@@ -5,6 +5,7 @@ import { History, Target, Award, Users, Globe, Zap, Heart } from 'lucide-react';
 import { SEO_CONFIG } from '@/utils/constants';
 import { motion } from 'framer-motion';
 import { fadeUpVariants, defaultViewport } from '@/utils/animations';
+import { WorldMap } from '@/components/common/WorldMap';
 
 export const About = () => {
   // Breadcrumb Schema
@@ -117,6 +118,53 @@ export const About = () => {
                 A legacy of quality, innovation, and trust spanning over 80 years of noodle making excellence.
               </p>
             </motion.div>
+          </div>
+        </Section>
+
+        {/* THE ORIGIN STORY */}
+        <Section className="bg-white py-20 relative">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+          <div className="absolute bottom-20 left-0 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+
+          <div className="max-w-4xl mx-auto px-4 relative z-10">
+            <div className="text-center mb-16">
+              <span className="text-primary-600 font-bold tracking-wider uppercase text-sm mb-2 block">Our Story</span>
+              <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 mb-6">Tracing Our Humble Beginnings</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-primary-400 to-yellow-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div className="space-y-10 text-lg md:text-xl text-gray-700 leading-relaxed font-medium">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                <p>
+                  <span className="text-5xl font-heading font-bold text-primary-600 float-left mr-3 mt-1 leading-none">N</span>
+                  gosiok Marketing traces its humble beginnings to the early 20th century when the father of Lucio Ngosiok opened the business of making Chinese noodles in the coastal town of Fujian, China. Unfortunately, he did not live long enough to pass on the business to the next generation as the orphaned children were aged five and three.
+                </p>
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} className="bg-gray-50 border-l-4 border-primary-500 p-6 md:p-8 rounded-r-2xl shadow-sm">
+                <p>
+                  With the desire to continue his father's business, <strong>Lucio Ngosiok</strong> (known to his friends and peers only as Ngo Siok and the founder of the present enterprise) learned the rudiments of noodle making to start this business in Cebu City, Philippines, during World War II in 1943. With a pair of hands and simple implements, he produced noodles from rice to cater to a few but growing market. This heralded the start of the noodle industry in Cebu.
+                </p>
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                <p>
+                  The lingering menace of war forced the business to move from place to place. For a short time, the business was established in Bato, Leyte. After the war, the patriarch re-established the business in Cebu.
+                </p>
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                <p>
+                  With the passing of the patriarch in 1973, two descendants of Ngo Siok assumed the management of the business. Their able leadership has steered the business to its present innovativeness and stature.
+                </p>
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} className="bg-gradient-to-br from-primary-50 to-white border border-primary-100 p-6 md:p-8 rounded-2xl shadow-sm">
+                <p>
+                  In mid-1970's, <strong>Ngosiok Marketing</strong> was established to represent four affiliated companies producing different types of noodles. Two companies are producing the wheat-based Chinese noodles under the brand names <em>First Choice</em> and <em>Long Life</em>. Two other separate facilities manufacture the cornstarch-based noodles under the brand names <span className="text-yellow-700 font-bold">Eagle VSP</span> and <span className="text-yellow-700 font-bold">Super Q</span>.
+                </p>
+              </motion.div>
+            </div>
           </div>
         </Section>
 
@@ -267,6 +315,23 @@ export const About = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </Section>
+
+        {/* GLOBAL REACH MAP SECTION */}
+        <Section className="bg-white py-24">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <span className="text-secondary-600 font-bold tracking-wider uppercase text-sm mb-2 block">Our Reach</span>
+              <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 mb-6">Nationwide Presence, Global Appeal</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-secondary-400 to-primary-500 mx-auto rounded-full mb-8"></div>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                From our strategic hub in Cebu, our distribution network spans the entire Philippines and extends to key international markets across the globe.
+              </p>
+            </div>
+
+            <WorldMap />
+
           </div>
         </Section>
 

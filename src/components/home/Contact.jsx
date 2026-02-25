@@ -109,7 +109,7 @@ export const Contact = () => {
         >
           <iframe
             title="NGOSIOK MARKETING Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.4937!2d123.9!3d10.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDE4JzAwLjAiTiAxMjPCsDU0JzAwLjAiRQ!5e0!3m2!1sen!2sph!4v1234567890!5m2!1sen!2sph&q=325+B.+Aranas+Street,+Cebu+City+6000,+Philippines"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.4937!2d123.8829062!3d10.2952342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a99bfee9ad9c2d%3A0x1670c596fbaf29f9!2sNgosiok%20Marketing!5e0!3m2!1sen!2sph!4v1714000000000!5m2!1sen!2sph"
             width="100%"
             height="100%"
             style={{ border: 0 }}

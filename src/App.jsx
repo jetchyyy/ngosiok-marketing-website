@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { ScrollToTop } from '@/components/common/ScrollToTop';
 import { Home } from '@/pages/Home';
 import { About } from '@/pages/About';
 import { Products } from '@/pages/Products';
@@ -10,6 +11,7 @@ import { NotFound } from '@/pages/NotFound';
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       <Header />
       <div className="flex-grow">
         <Routes>
