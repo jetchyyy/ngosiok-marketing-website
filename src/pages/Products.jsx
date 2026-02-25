@@ -103,19 +103,19 @@ export const Products = () => {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-10">
             {filteredProducts.map((product) => (
               <div key={product.id} className="group flex flex-col h-full">
                 {/* Image Container - The "Card" part */}
                 <div
-                  className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-white mb-5 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100 group-hover:border-primary-100 group-hover:-translate-y-2 cursor-pointer"
+                  className="relative aspect-[3/4] overflow-hidden rounded-2xl md:rounded-3xl bg-white mb-3 md:mb-5 shadow-sm group-hover:shadow-xl transition-all duration-500 border border-gray-100 group-hover:border-primary-100 group-hover:-translate-y-2 cursor-pointer"
                   onClick={() => setSelectedProduct(product)}
                 >
                   {/* Floating Badge */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className="bg-white/95 backdrop-blur-md text-primary-700 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm border border-primary-100 flex items-center gap-1">
-                      <Star className="w-3 h-3 fill-primary-600 text-primary-600" />
-                      {product.category}
+                  <div className="absolute top-2 left-2 md:top-4 md:left-4 z-10">
+                    <span className="bg-white/95 backdrop-blur-md text-primary-700 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold shadow-sm border border-primary-100 flex items-center gap-1">
+                      <Star className="w-2.5 h-2.5 md:w-3 md:h-3 fill-primary-600 text-primary-600" />
+                      <span className="hidden sm:inline">{product.category}</span>
                     </span>
                   </div>
 
@@ -128,26 +128,26 @@ export const Products = () => {
 
                   {/* Quick View Button (Overlay) */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
-                    <span className="bg-white text-gray-900 px-6 py-3 rounded-full font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    <span className="bg-white text-gray-900 px-4 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-base font-bold shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
                       View Details
                     </span>
                   </div>
                 </div>
 
                 {/* Content - Below Image */}
-                <div className="flex-1 flex flex-col px-2">
+                <div className="flex-1 flex flex-col px-1 md:px-2">
                   <h3
-                    className="text-2xl font-bold text-gray-900 mb-2 font-heading group-hover:text-primary-600 transition-colors cursor-pointer"
+                    className="text-sm md:text-2xl font-bold text-gray-900 mb-1 md:mb-2 font-heading group-hover:text-primary-600 transition-colors cursor-pointer line-clamp-2"
                     onClick={() => setSelectedProduct(product)}
                   >
                     {product.name}
                   </h3>
 
-                  <p className="text-gray-600 mb-4 line-clamp-2 font-medium text-sm leading-relaxed">
+                  <p className="text-gray-600 mb-2 md:mb-4 line-clamp-2 text-xs md:text-sm font-medium leading-relaxed">
                     {product.description}
                   </p>
 
-                  <div className="mt-auto">
+                  <div className="mt-auto hidden md:block">
                     <ul className="flex flex-wrap gap-2">
                       {product.features.slice(0, 3).map((feature, idx) => (
                         <li key={idx} className="flex items-center text-xs font-semibold text-primary-700 bg-primary-50 px-2 py-1 rounded-md">
@@ -206,70 +206,70 @@ export const Products = () => {
                 {/* Close Button */}
                 <button
                   onClick={() => setSelectedProduct(null)}
-                  className="absolute top-4 right-4 z-20 bg-white/50 hover:bg-white text-gray-700 hover:text-gray-900 p-2 rounded-full backdrop-blur-md transition-all duration-300 hover:rotate-90 shadow-sm"
+                  className="absolute top-2 right-2 md:top-4 md:right-4 z-20 bg-white/50 hover:bg-white text-gray-700 hover:text-gray-900 p-2 rounded-full backdrop-blur-md transition-all duration-300 hover:rotate-90 shadow-sm"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
 
                 {/* Left Side - Image */}
-                <div className="w-full md:w-1/2 h-64 md:h-auto relative bg-gray-100">
+                <div className="w-full md:w-1/2 h-[38vh] sm:h-[45vh] md:h-auto relative bg-white md:bg-gray-100 p-2 sm:p-4 md:p-0 flex items-center justify-center shrink-0 border-b border-gray-100 md:border-none">
+                  <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white pointer-events-none md:hidden" />
                   <img
                     src={selectedProduct.image}
                     alt={selectedProduct.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain md:object-cover relative z-10"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none md:hidden" />
                 </div>
 
                 {/* Right Side - Details */}
-                <div className="w-full md:w-1/2 p-8 md:p-10 flex flex-col overflow-y-auto">
-                  <div className="mb-6">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
-                      <Star className="w-3.5 h-3.5 fill-primary-600" />
+                <div className="w-full md:w-1/2 p-5 sm:p-8 md:p-10 flex flex-col overflow-hidden">
+                  <div className="mb-3 md:mb-6">
+                    <span className="inline-flex items-center gap-1 md:gap-1.5 px-2 py-1 md:px-3 md:py-1 bg-primary-50 text-primary-700 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider mb-2 md:mb-4">
+                      <Star className="w-3 h-3 md:w-3.5 md:h-3.5 fill-primary-600" />
                       {selectedProduct.category}
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-4 leading-tight">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-heading text-gray-900 mb-1 sm:mb-2 md:mb-4 leading-tight line-clamp-1 md:line-clamp-none">
                       {selectedProduct.name}
                     </h2>
-                    <p className="text-gray-600 text-lg leading-relaxed">
+                    <p className="text-gray-600 text-xs sm:text-sm md:text-lg leading-relaxed line-clamp-2 md:line-clamp-none">
                       {selectedProduct.description}
                     </p>
                   </div>
 
-                  <div className="mb-8">
-                    <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">
+                  <div className="mb-3 md:mb-8 hidden sm:block">
+                    <h3 className="text-xs md:text-sm font-bold text-gray-900 uppercase tracking-wider mb-2 md:mb-4 border-b border-gray-100 pb-2">
                       Key Features
                     </h3>
-                    <ul className="grid grid-cols-1 gap-3">
+                    <ul className="grid grid-cols-1 gap-2 md:gap-3">
                       {selectedProduct.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
-                          <div className="bg-green-100 rounded-full p-1 mr-3 mt-0.5">
-                            <Check className="w-3 h-3 text-green-600" />
+                          <div className="bg-green-100 rounded-full p-1 mr-2 md:mr-3 mt-0.5">
+                            <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-green-600" />
                           </div>
-                          <span className="text-gray-700 font-medium">{feature}</span>
+                          <span className="text-gray-700 text-xs md:text-base font-medium">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="mt-auto pt-6 border-t border-gray-100">
-                    <p className="text-sm text-gray-500 mb-4">
+                  <div className="mt-auto pt-3 md:pt-6 border-t border-gray-100">
+                    <p className="text-[10px] md:text-sm text-gray-500 mb-2 md:mb-4 hidden sm:block">
                       Interested in this product? Contact our sales team for pricing and availability.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex flex-row gap-2 md:gap-3">
                       <Link
                         to="/contact"
-                        className="flex-1 inline-flex justify-center items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-primary-700 transition-colors shadow-lg shadow-primary/20"
+                        className="flex-1 inline-flex justify-center items-center gap-1 md:gap-2 bg-primary-600 text-white px-3 py-2 md:px-6 md:py-3 rounded-lg md:rounded-xl text-xs md:text-base font-bold hover:bg-primary-700 transition-colors shadow-lg shadow-primary/20"
                       >
-                        <Phone className="w-5 h-5" />
+                        <Phone className="w-4 h-4 md:w-5 md:h-5" />
                         Call Now
                       </Link>
                       <Link
                         to="/contact"
-                        className="flex-1 inline-flex justify-center items-center gap-2 bg-white text-gray-800 border-2 border-gray-200 px-6 py-3 rounded-xl font-bold hover:border-primary-600 hover:text-primary-600 transition-all"
+                        className="flex-1 inline-flex justify-center items-center gap-1 md:gap-2 bg-white text-gray-800 border md:border-2 border-gray-200 px-3 py-2 md:px-6 md:py-3 rounded-lg md:rounded-xl text-xs md:text-base font-bold hover:border-primary-600 hover:text-primary-600 transition-all"
                       >
-                        <MessageCircle className="w-5 h-5" />
-                        Enquire
+                        <MessageCircle className="w-4 h-4 md:w-5 md:h-5" />
+                        Inquire
                       </Link>
                     </div>
                   </div>

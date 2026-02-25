@@ -13,7 +13,7 @@ export const Footer = () => {
     <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300 overflow-hidden">
       {/* Decorative gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary-600/10 to-secondary-600/10 pointer-events-none" />
-      
+
       <Container className="relative z-10">
         <motion.div
           initial="hidden"
@@ -26,8 +26,8 @@ export const Footer = () => {
           <motion.div variants={fadeUpVariants} custom={0}>
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center shadow-lg">
-                <img 
-                  src="/logo.jpg" 
+                <img
+                  src="/logo.jpg"
                   alt={COMPANY_INFO.name}
                   className="w-full h-full object-contain rounded-xl"
                 />
@@ -101,19 +101,19 @@ export const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="hover:text-primary-400 transition-colors cursor-pointer flex items-center group">
                 <span className="w-1.5 h-1.5 bg-tertiary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                Super Q Golden Bihon
+                <Link to="/products">Super Q Golden Bihon</Link>
               </li>
               <li className="hover:text-primary-400 transition-colors cursor-pointer flex items-center group">
                 <span className="w-1.5 h-1.5 bg-tertiary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                Eagle VSP Bihon
+                <Link to="/products">Super Q Pancit Canton</Link>
               </li>
               <li className="hover:text-primary-400 transition-colors cursor-pointer flex items-center group">
                 <span className="w-1.5 h-1.5 bg-tertiary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                First Choice Noodles
+                <Link to="/products">Super Q Special Palabok</Link>
               </li>
               <li className="hover:text-primary-400 transition-colors cursor-pointer flex items-center group">
                 <span className="w-1.5 h-1.5 bg-tertiary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                Long Life Noodles
+                <Link to="/products">First Choice Noodles</Link>
               </li>
             </ul>
           </motion.div>
@@ -155,8 +155,18 @@ export const Footer = () => {
           className="border-t border-white/10 py-6"
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm">
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-center md:text-left">
               © {currentYear} <span className="text-white font-semibold">{COMPANY_INFO.name}</span>. All rights reserved.
+              <br className="md:hidden" />
+              <span className="hidden md:inline"> | </span>
+              <a
+                href="https://www.facebook.com/profile.php?id=61587269647950"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-400 hover:text-primary-300 transition-colors inline-block mt-2 md:mt-0"
+              >
+                Created by ODC
+              </a>
             </p>
             <div className="flex items-center space-x-6 text-gray-400">
               <Link to="/privacy" className="hover:text-primary-400 transition-colors">

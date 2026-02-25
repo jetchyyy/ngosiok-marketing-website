@@ -107,8 +107,8 @@ export const Hero = () => {
             </motion.div>
           </div>
 
-          <div className="relative order-1 lg:order-2">
-            <div className="relative w-full max-w-[250px] sm:max-w-[320px] lg:max-w-md mx-auto">
+          <div className="relative order-1 lg:order-2 mb-10 sm:mb-12 lg:mb-0">
+            <div className="relative w-full max-w-[250px] sm:max-w-[320px] lg:max-w-md mx-auto flex justify-center">
               {/* TiltedCard Image */}
               <div className="sm:hidden">
                 <TiltedCard

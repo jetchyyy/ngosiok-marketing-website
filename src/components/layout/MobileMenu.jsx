@@ -6,7 +6,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
   return (
     <div
       className={classNames(
-        'fixed inset-0 top-[72px] bg-white z-40 md:hidden transition-all duration-300',
+        'fixed inset-0 top-[90px] bg-white z-40 md:hidden transition-all duration-300',
         isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
       )}
     >

@@ -85,7 +85,7 @@ export const Header = () => {
                   </motion.div>
                   <motion.div
                     layout
-                    className="hidden sm:block"
+                    className="block"
                   >
                     <motion.h1
                       layout
